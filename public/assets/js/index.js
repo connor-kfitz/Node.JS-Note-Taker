@@ -4,7 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-if (window.location.pathname == '/C:/Users/Connor/Documents/School/UofT-Full-Stack-Developer-Course/Assignemnts/06-Week/11-Express-JS-Note-Taker/public/notes.html') {
+if (window.location.pathname == '/notes.html') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
@@ -12,7 +12,7 @@ if (window.location.pathname == '/C:/Users/Connor/Documents/School/UofT-Full-Sta
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
-console.log(window.location.pathname);
+console.log(noteTitle.value);
 
 // Show an element
 const show = (elem) => {
@@ -73,6 +73,7 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
+  console.log(newNote)
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -175,7 +176,7 @@ const renderNoteList = async (notes) => {
 // Gets notes from the db and renders them to the sidebar
 // const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
-if (window.location.pathname == '/C:/Users/Connor/Documents/School/UofT-Full-Stack-Developer-Course/Assignemnts/06-Week/11-Express-JS-Note-Taker/public/notes.html') {
+if (window.location.pathname == '/notes.html') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
@@ -183,4 +184,5 @@ if (window.location.pathname == '/C:/Users/Connor/Documents/School/UofT-Full-Sta
 }
 
 // getAndRenderNotes();
+
 
