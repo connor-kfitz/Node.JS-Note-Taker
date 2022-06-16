@@ -43,7 +43,6 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   })
 
-
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -74,6 +73,7 @@ const handleNoteSave = () => {
     text: noteText.value,
   };
     saveNote(newNote).then(() => {
+      
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -170,7 +170,6 @@ const renderNoteList = async (notes) => {
   });
 
   if (window.location.pathname == '/notes') {
-    console.log('yessir');
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };

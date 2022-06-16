@@ -1,42 +1,10 @@
 [
     {
-        "title": "aa",
-        "text": "aa"
+        "title": "First Note",
+        "text": "First"
     },
     {
-        "title": "asd",
-        "text": "asd"
-    },
-    {
-        "title": "asdasd",
-        "text": "asdas"
-    },
-    {
-        "title": "New Test",
-        "text": "Please Work"
-    },
-    {
-        "title": "New Test",
-        "text": "Please Work"
-    },
-    {
-        "title": "New Test",
-        "text": "Please Work"
-    },
-    {
-        "title": "New Test",
-        "text": "Please Work"
-    },
-    {
-        "title": "New Test",
-        "text": "Please Work"
-    },
-    {
-        "title": "New Test",
-        "text": "Please Work"
-    },
-    {
-        "title": "New Test",
-        "text": "Please Work"
+        "title": "Second Note",
+        "text": "Second"
     }
 ]
