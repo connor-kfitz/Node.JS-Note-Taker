@@ -4,7 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-if (window.location.pathname == '/notes') {
+if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note');
@@ -25,6 +25,7 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+// Get request to the information in notes.json
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -33,7 +34,7 @@ const getNotes = () =>
     },
   });
 
-
+// Post request to notes.json
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -51,10 +52,11 @@ const deleteNote = (id) =>
     },
   });
 
+// Used to render title and text from a note selected in the side bar, to the display column
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
-  if (activeNote.id) {
+  if (activeNote.title) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
@@ -67,13 +69,13 @@ const renderActiveNote = () => {
   }
 };
 
+// Used to save a note
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
   };
     saveNote(newNote).then(() => {
-      
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -101,6 +103,9 @@ const handleNoteDelete = (e) => {
 const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  // noteTitle.value = activeNote.title;
+  // noteText.value = activeNote.text;
+  console.log(activeNote.id);
   renderActiveNote();
 };
 
@@ -125,6 +130,7 @@ const renderNoteList = async (notes) => {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
 
+  // console.log(jsonNotes);
   let noteListItems = [];
 
   // Returns HTML element with or without a delete button
@@ -160,7 +166,7 @@ const renderNoteList = async (notes) => {
     noteListItems.push(createLi('No saved Notes', false));
   }
 
-  console.log(jsonNotes);
+  // console.log(jsonNotes);
 
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
@@ -169,7 +175,7 @@ const renderNoteList = async (notes) => {
     noteListItems.push(li);
   });
 
-  if (window.location.pathname == '/notes') {
+  if (window.location.pathname === '/notes') {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
@@ -184,6 +190,7 @@ if (window.location.pathname == '/notes') {
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
+// Starts program by rendering all saved notes from notes.json
 getAndRenderNotes();
 
 
