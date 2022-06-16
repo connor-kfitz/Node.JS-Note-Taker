@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const {
+  readFromFile,
+} = require('./helpers/fsUtils');
 
 const PORT = 3001;
 
@@ -23,11 +26,7 @@ app.get('/notes', (req, res) =>
 
 // Get Request for Notes File
 app.get('/api/notes', (req, res) => {
-  // Send a message to the client
-  res.status(200).json(`${req.method} request received to get notes`);
-
-  // Log our request to the terminal
-  console.info(`${req.method} request received to get notes`);
+  readFromFile('./db/notes.json').then((data) => res.json(JSON.parse(data)));
 });
 
 // POST Request to Add a Note File
@@ -37,27 +36,40 @@ app.post('/api/notes', (req, res) => {
 
   // Destructuring assignment for the items in req.body
   const { title , text } = req.body;
-
-  // If all the required properties are present
   if (title && text) {
     // Variable for the object we will save
     const newNote = {
       title,
       text,
-      // review_id: uuid(),
     };
-    // Write updated reviews back to the file
-    fs.writeFile(
-      './db/notes.json',
-      JSON.stringify(newNote, null, 4),
-      (writeErr) =>
-        writeErr
-          ? console.error(writeErr)
-          : console.info('Successfully added a new note')
-    );
+
+    // Obtain existing reviews
+    fs.readFile('./db/notes.json', 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        // Convert string into JSON object
+        const parsedNotes = JSON.parse(data);
+
+        // Add a new note to the array
+        parsedNotes.push(newNote);
+
+        // Write updated reviews back to the file
+        fs.writeFile(
+          './db/notes.json',
+          JSON.stringify(parsedNotes, null, 4),
+          (writeErr) =>
+            writeErr
+              ? console.error(writeErr)
+              : console.info('Successfully added a new note')
+        );
       }
+    });
+  }
+
+
 });
-  
+
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
