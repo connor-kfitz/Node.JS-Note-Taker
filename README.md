@@ -2,6 +2,8 @@
 
 ## Link
 
+https://dry-river-37645.herokuapp.com/
+
 ## Description
 The goal of this project is to create the backend for a note taking app using express.js.  Front-end developement for the application is already made, but parts need to be modififed in order to meet acceptance criteria.  The home and application pages will need to be linked using get requests.  Multiple get and pull requests will need to be utilized to save note information in a "data-base" (notes.json file), and load it on page launch.  Saved note files will also need to be made accesible, so that users can access information they have saved in the data-base.  
 
@@ -19,4 +21,10 @@ The goal of this project is to create the backend for a note taking app using ex
 
 6.  Modified if statment in index.js to allow old text files to render to the screen.
 
-## Citations
+## Pictures of Application
+
+### Home Page
+![Picture of Home Page](./public/assets/pictures/Note-Taker-Home-Page.png)
+
+### App Page
+![Picture of App Page](./public/assets/pictures/Note-Taker-App-Page.png)
